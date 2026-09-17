@@ -21,6 +21,13 @@ function App() {
     setTransactions([...transactions, newTransaction]);
   };
 
+  const deleteTransaction = (id) => {
+    const remainingTransactions = transactions.filter(
+      (transaction) => transaction.id !== id,
+    );
+    setTransactions(remainingTransactions);
+  };
+
   return (
     <>
       <Routes>
@@ -32,6 +39,7 @@ function App() {
               <Transactions
                 transactions={transactions}
                 addTransaction={addTransaction}
+                deleteTransaction={deleteTransaction}
               />
             }
           />

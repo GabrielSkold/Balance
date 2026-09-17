@@ -1,11 +1,15 @@
 import TransactionItem from "../TransactionItem/TransactionItem";
 
-const TransactionsList = ({ transactions }) => {
+const TransactionsList = ({ transactions, deleteTransaction }) => {
   return (
     <>
       <ul>
         {transactions.map((transaction) => (
-          <TransactionItem key={transaction.id} transaction={transaction} />
+          <TransactionItem
+            key={transaction.id}
+            transaction={transaction}
+            deleteTransaction={deleteTransaction}
+          />
         ))}
       </ul>
     </>

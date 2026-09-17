@@ -36,6 +36,11 @@ const TransactionsForm = ({ addTransaction }) => {
       category: category,
     };
     addTransaction(newTransaction);
+    setDescription("");
+    setAmount("");
+    setType("Income");
+    setDate("");
+    setCategory("");
   };
 
   return (
@@ -90,7 +95,6 @@ const TransactionsForm = ({ addTransaction }) => {
           <option value="other">Other</option>
         </select>
         {errors.category && <p role="alert">{errors.category}</p>}
-
         <button type="submit">Add transaction</button>
       </form>
     </>

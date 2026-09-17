@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TransactionsForm = () => {
+const TransactionsForm = ({ addTransaction }) => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("income");
@@ -24,6 +24,18 @@ const TransactionsForm = () => {
       newErrors.category = "Assign category for transaction.";
     }
     setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
+    const newTransaction = {
+      id: crypto.randomUUID(),
+      description: description.trim(),
+      amount: Number(amount),
+      type: type,
+      date: date,
+      category: category,
+    };
+    addTransaction(newTransaction);
   };
 
   return (

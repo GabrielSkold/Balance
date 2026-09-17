@@ -1,4 +1,4 @@
-import { Routes, Route, Router, data } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Overview from "./pages/Overview/Overview";
 import Transactions from "./pages/Transactions/Transactions";
@@ -12,10 +12,14 @@ function App() {
       description: "Grocery shopping",
       amount: 2,
       type: "expense",
-      category: "Food",
+      category: "food",
       date: "2026-09/15",
     },
   ]);
+
+  const addTransaction = (newTransaction) => {
+    setTransactions([...transactions, newTransaction]);
+  };
 
   return (
     <>
@@ -24,7 +28,12 @@ function App() {
           <Route path="/" element={<Overview />} />
           <Route
             path="/transactions"
-            element={<Transactions transactions={transactions} />}
+            element={
+              <Transactions
+                transactions={transactions}
+                addTransaction={addTransaction}
+              />
+            }
           />
         </Route>
       </Routes>

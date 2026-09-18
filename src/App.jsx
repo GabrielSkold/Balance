@@ -3,19 +3,22 @@ import "./App.css";
 import Overview from "./pages/Overview/Overview";
 import Transactions from "./pages/Transactions/Transactions";
 import Layout from "./components/Layout/Layout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      description: "Grocery shopping",
-      amount: 2,
-      type: "expense",
-      category: "food",
-      date: "2026-09/15",
-    },
-  ]);
+  const [transactions, setTransactions] = useState(() => {
+    const savedTransactions = localStorage.getItem("transactions");
+
+    if (savedTransactions !== null) {
+      return JSON.parse(savedTransactions);
+    }
+
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
 
   const addTransaction = (newTransaction) => {
     setTransactions([...transactions, newTransaction]);

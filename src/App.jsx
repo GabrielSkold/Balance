@@ -6,19 +6,47 @@ import Layout from "./components/Layout/Layout";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [transactions, setTransactions] = useState(() => {
-    const savedTransactions = localStorage.getItem("transactions");
+  const [storageResult] = useState(() => {
+    try {
+      const savedTransactions = localStorage.getItem("transactions");
 
-    if (savedTransactions !== null) {
-      return JSON.parse(savedTransactions);
+      if (savedTransactions === null) {
+        return { transactions: [], loadFailed: false };
+      }
+
+      const parsedTransactions = JSON.parse(savedTransactions);
+
+      if (Array.isArray(parsedTransactions)) {
+        return {
+          transactions: parsedTransactions,
+          loadFailed: false,
+        };
+      }
+
+      return { transactions: [], loadFailed: true };
+    } catch {
+      return { transactions: [], loadFailed: true };
     }
-
-    return [];
   });
 
+  const [transactions, setTransactions] = useState(storageResult.transactions);
+
+  const [saveError, setSaveError] = useState("");
+
   useEffect(() => {
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-  }, [transactions]);
+    if (storageResult.loadFailed) {
+      return;
+    }
+
+    try {
+      localStorage.setItem("transactions", JSON.stringify(transactions));
+      setSaveError("");
+    } catch {
+      setSaveError(
+        "Changes could not be saved. They may be lost when you reload.",
+      );
+    }
+  }, [transactions, storageResult.loadFailed]);
 
   const addTransaction = (newTransaction) => {
     setTransactions([...transactions, newTransaction]);
@@ -33,6 +61,12 @@ function App() {
 
   return (
     <>
+      {storageResult.loadFailed && (
+        <p role="alert">
+          Saved transactions could not be loaded. Changes will not be saved.
+        </p>
+      )}
+      {saveError && <p role="alert">{saveError}</p>}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Overview />} />

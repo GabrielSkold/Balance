@@ -1,3 +1,4 @@
+import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import SummaryCard from "../../components/SummaryCard/SummaryCard";
 
 const Overview = ({ transactions }) => {
@@ -23,6 +24,7 @@ const Overview = ({ transactions }) => {
       <SummaryCard label={"Income"} amount={totalIncome} />
       <SummaryCard label={"expense"} amount={totalExpenses} />
       <SummaryCard label={"Balance"} amount={balance} />
+      <CurrencyConverter />
     </>
   );
 };

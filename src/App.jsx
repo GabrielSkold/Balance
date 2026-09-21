@@ -3,19 +3,50 @@ import "./App.css";
 import Overview from "./pages/Overview/Overview";
 import Transactions from "./pages/Transactions/Transactions";
 import Layout from "./components/Layout/Layout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      description: "Grocery shopping",
-      amount: 2,
-      type: "expense",
-      category: "food",
-      date: "2026-09/15",
-    },
-  ]);
+  const [storageResult] = useState(() => {
+    try {
+      const savedTransactions = localStorage.getItem("transactions");
+
+      if (savedTransactions === null) {
+        return { transactions: [], loadFailed: false };
+      }
+
+      const parsedTransactions = JSON.parse(savedTransactions);
+
+      if (Array.isArray(parsedTransactions)) {
+        return {
+          transactions: parsedTransactions,
+          loadFailed: false,
+        };
+      }
+
+      return { transactions: [], loadFailed: true };
+    } catch {
+      return { transactions: [], loadFailed: true };
+    }
+  });
+
+  const [transactions, setTransactions] = useState(storageResult.transactions);
+
+  const [saveError, setSaveError] = useState("");
+
+  useEffect(() => {
+    if (storageResult.loadFailed) {
+      return;
+    }
+
+    try {
+      localStorage.setItem("transactions", JSON.stringify(transactions));
+      setSaveError("");
+    } catch {
+      setSaveError(
+        "Changes could not be saved. They may be lost when you reload.",
+      );
+    }
+  }, [transactions, storageResult.loadFailed]);
 
   const addTransaction = (newTransaction) => {
     setTransactions([...transactions, newTransaction]);
@@ -30,6 +61,12 @@ function App() {
 
   return (
     <>
+      {storageResult.loadFailed && (
+        <p role="alert">
+          Saved transactions could not be loaded. Changes will not be saved.
+        </p>
+      )}
+      {saveError && <p role="alert">{saveError}</p>}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Overview />} />

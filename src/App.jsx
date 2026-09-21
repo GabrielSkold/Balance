@@ -69,7 +69,7 @@ function App() {
       {saveError && <p role="alert">{saveError}</p>}
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Overview />} />
+          <Route path="/" element={<Overview transactions={transactions} />} />
           <Route
             path="/transactions"
             element={

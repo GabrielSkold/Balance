@@ -1,3 +1,5 @@
+import SummaryCard from "../../components/SummaryCard/SummaryCard";
+
 const Overview = ({ transactions }) => {
   const incomeTransactions = transactions.filter(
     (transaction) => transaction.type === "income",
@@ -18,9 +20,9 @@ const Overview = ({ transactions }) => {
   return (
     <>
       <h1>Overview</h1>
-      <p>Income: {totalIncome}</p>
-      <p>Expenses: {totalExpenses}</p>
-      <p>Balance: {balance} </p>
+      <SummaryCard label={"Income"} amount={totalIncome} />
+      <SummaryCard label={"expense"} amount={totalExpenses} />
+      <SummaryCard label={"Balance"} amount={balance} />
     </>
   );
 };

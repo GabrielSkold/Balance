@@ -38,7 +38,7 @@ const TransactionsForm = ({ addTransaction }) => {
     addTransaction(newTransaction);
     setDescription("");
     setAmount("");
-    setType("Income");
+    setType("income");
     setDate("");
     setCategory("");
   };

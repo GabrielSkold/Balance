@@ -2,6 +2,7 @@ import { useState } from "react";
 import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
 import SummaryCard from "../../components/SummaryCard/SummaryCard";
 import TransactionsList from "../../components/TransactionsList/TransactionsList";
+import CategorySummary from "../../components/CategorySummary/CategorySummary";
 
 const Overview = ({ transactions }) => {
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -42,6 +43,10 @@ const Overview = ({ transactions }) => {
       <SummaryCard label={"Income"} amount={totalIncome} />
       <SummaryCard label={"expense"} amount={totalExpenses} />
       <SummaryCard label={"Balance"} amount={balance} />
+      <CategorySummary
+        expenseTransactions={expenseTransactions}
+        totalExpenses={totalExpenses}
+      />
       <h2>Recent transactions</h2>
       <TransactionsList transactions={recentTransactions} />
       <CurrencyConverter />

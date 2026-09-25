@@ -11,6 +11,7 @@ const TransactionsForm = ({ addTransaction }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = {};
+
     if (description.trim() === "") {
       newErrors.description = "Please enter a description.";
     }
@@ -23,10 +24,13 @@ const TransactionsForm = ({ addTransaction }) => {
     if (category.trim() === "") {
       newErrors.category = "Assign category for transaction.";
     }
+
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length > 0) {
       return;
     }
+
     const newTransaction = {
       id: crypto.randomUUID(),
       description: description.trim(),
@@ -35,6 +39,7 @@ const TransactionsForm = ({ addTransaction }) => {
       date: date,
       category: category,
     };
+
     addTransaction(newTransaction);
     setDescription("");
     setAmount("");
@@ -54,6 +59,7 @@ const TransactionsForm = ({ addTransaction }) => {
           onChange={(event) => setDescription(event.target.value)}
         />
         {errors.description && <p role="alert">{errors.description}</p>}
+
         <label htmlFor="amount">Amount</label>
         <input
           value={amount}
@@ -62,16 +68,21 @@ const TransactionsForm = ({ addTransaction }) => {
           onChange={(event) => setAmount(event.target.value)}
         />
         {errors.amount && <p role="alert">{errors.amount}</p>}
+
         <label htmlFor="type">Type</label>
         <select
           name="type"
           id="type"
           value={type}
-          onChange={(event) => setType(event.target.value)}
+          onChange={(event) => {
+            setType(event.target.value);
+            setCategory("");
+          }}
         >
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
+
         <label htmlFor="date">Date</label>
         <input
           id="date"
@@ -80,6 +91,7 @@ const TransactionsForm = ({ addTransaction }) => {
           onChange={(event) => setDate(event.target.value)}
         />
         {errors.date && <p role="alert">{errors.date}</p>}
+
         <label htmlFor="category">Category</label>
         <select
           name="category"
@@ -88,16 +100,25 @@ const TransactionsForm = ({ addTransaction }) => {
           onChange={(event) => setCategory(event.target.value)}
         >
           <option value="">Select category</option>
-          <option value="salary">Salary</option>
-          <option value="food">Food</option>
-          <option value="housing">Housing</option>
-          <option value="transportation">Transportation</option>
+
+          {type === "income" && <option value="salary">Salary</option>}
+
+          {type === "expense" && (
+            <>
+              <option value="food">Food</option>
+              <option value="housing">Housing</option>
+              <option value="transportation">Transportation</option>
+            </>
+          )}
+
           <option value="other">Other</option>
         </select>
         {errors.category && <p role="alert">{errors.category}</p>}
+
         <button type="submit">Add transaction</button>
       </form>
     </>
   );
 };
+
 export default TransactionsForm;

@@ -2,11 +2,11 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <>
-      <header>
+    <div className="app-shell">
+      <header className="app-header">
         <h1>Balance</h1>
         <p>Track your income and expenses</p>
-        <nav>
+        <nav className="app-nav">
           <NavLink to={"/"}>Overview</NavLink>
           <NavLink to={"/transactions"}>Transactions</NavLink>
         </nav>
@@ -14,7 +14,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 };
 export default Layout;

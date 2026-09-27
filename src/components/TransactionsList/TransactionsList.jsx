@@ -7,7 +7,7 @@ const TransactionsList = ({ transactions, deleteTransaction }) => {
   }
   return (
     <>
-      <ul>
+      <ul className="transactions-list">
         {transactions.map((transaction) => (
           <TransactionItem
             key={transaction.id}

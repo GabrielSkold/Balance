@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { data } from "react-router-dom";
 
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState("");
@@ -33,7 +32,7 @@ const CurrencyConverter = () => {
   const convertedAmount = Number(amount) * exchangeRate;
 
   return (
-    <>
+    <section className="currency-converter">
       <h2>Currency converter</h2>
       {loading && <p>Loading exchange rate…</p>}
       {error && <p role="alert">{error}</p>}
@@ -47,7 +46,7 @@ const CurrencyConverter = () => {
       {!loading && !error && Number(amount) > 0 && (
         <p>{convertedAmount.toFixed(2)} EUR</p>
       )}
-    </>
+    </section>
   );
 };
 export default CurrencyConverter;

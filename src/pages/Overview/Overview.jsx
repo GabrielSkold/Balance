@@ -32,24 +32,37 @@ const Overview = ({ transactions }) => {
 
   return (
     <>
-      <h1>Overview</h1>
-      <label htmlFor="filter-month">Filter by month</label>
-      <input
-        type="month"
-        id="filter-month"
-        value={selectedMonth}
-        onChange={(event) => setSelectedMonth(event.target.value)}
-      />
-      <SummaryCard label={"Income"} amount={totalIncome} />
-      <SummaryCard label={"expense"} amount={totalExpenses} />
-      <SummaryCard label={"Balance"} amount={balance} />
-      <CategorySummary
-        expenseTransactions={expenseTransactions}
-        totalExpenses={totalExpenses}
-      />
-      <h2>Recent transactions</h2>
-      <TransactionsList transactions={recentTransactions} />
-      <CurrencyConverter />
+      <div className="overview-top">
+        <div>
+          <h1>Overview</h1>
+          <label htmlFor="filter-month">Filter by month</label>
+          <input
+            type="month"
+            id="filter-month"
+            value={selectedMonth}
+            onChange={(event) => setSelectedMonth(event.target.value)}
+          />
+        </div>
+
+        <CurrencyConverter />
+      </div>
+      <div className="summary-cards">
+        <SummaryCard label={"Income"} amount={totalIncome} />
+        <SummaryCard label={"Expenses"} amount={totalExpenses} />
+        <SummaryCard label={"Balance"} amount={balance} />
+      </div>
+      <div className="overview-details">
+        <section>
+          <CategorySummary
+            expenseTransactions={expenseTransactions}
+            totalExpenses={totalExpenses}
+          />
+        </section>
+        <section>
+          <h2>Recent transactions</h2>
+          <TransactionsList transactions={recentTransactions} />
+        </section>
+      </div>
     </>
   );
 };

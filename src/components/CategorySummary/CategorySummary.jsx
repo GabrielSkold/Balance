@@ -33,16 +33,16 @@ const CategorySummary = ({ expenseTransactions, totalExpenses }) => {
         const percentage =
           totalExpenses > 0 ? (total / totalExpenses) * 100 : 0;
         return (
-          <div key={category.value}>
-            <p>
-              {category.label}: {total}
-            </p>
+          <div className="category-row" key={category.value}>
+            <span className="category-label">{category.label}</span>
+
             <div className="category-bar">
               <div
                 className="category-bar-fill"
                 style={{ width: `${percentage}%` }}
               ></div>
             </div>
+            <span className="category-total">{total}</span>
           </div>
         );
       })}

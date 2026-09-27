@@ -50,70 +50,78 @@ const TransactionsForm = ({ addTransaction }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="description">Description</label>
-        <input
-          value={description}
-          id="description"
-          type="text"
-          onChange={(event) => setDescription(event.target.value)}
-        />
-        {errors.description && <p role="alert">{errors.description}</p>}
+      <form className="transaction-form" onSubmit={handleSubmit}>
+        <div className="form-field">
+          <label htmlFor="description">Description</label>
+          <input
+            value={description}
+            id="description"
+            type="text"
+            onChange={(event) => setDescription(event.target.value)}
+          />
+          {errors.description && <p role="alert">{errors.description}</p>}
+        </div>
+        <div className="form-field">
+          <label htmlFor="amount">Amount</label>
+          <input
+            value={amount}
+            id="amount"
+            type="number"
+            onChange={(event) => setAmount(event.target.value)}
+          />
+          {errors.amount && <p role="alert">{errors.amount}</p>}
+        </div>
+        <div className="form-field">
+          <label htmlFor="type">Type</label>
+          <select
+            name="type"
+            id="type"
+            value={type}
+            onChange={(event) => {
+              setType(event.target.value);
+              setCategory("");
+            }}
+          >
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
 
-        <label htmlFor="amount">Amount</label>
-        <input
-          value={amount}
-          id="amount"
-          type="number"
-          onChange={(event) => setAmount(event.target.value)}
-        />
-        {errors.amount && <p role="alert">{errors.amount}</p>}
+        <div className="form-field">
+          <label htmlFor="date">Date</label>
+          <input
+            id="date"
+            type="date"
+            value={date}
+            onChange={(event) => setDate(event.target.value)}
+          />
+          {errors.date && <p role="alert">{errors.date}</p>}
+        </div>
 
-        <label htmlFor="type">Type</label>
-        <select
-          name="type"
-          id="type"
-          value={type}
-          onChange={(event) => {
-            setType(event.target.value);
-            setCategory("");
-          }}
-        >
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
-        </select>
+        <div className="form-field">
+          <label htmlFor="category">Category</label>
+          <select
+            name="category"
+            id="category"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+          >
+            <option value="">Select category</option>
 
-        <label htmlFor="date">Date</label>
-        <input
-          id="date"
-          type="date"
-          value={date}
-          onChange={(event) => setDate(event.target.value)}
-        />
-        {errors.date && <p role="alert">{errors.date}</p>}
+            {type === "income" && <option value="salary">Salary</option>}
 
-        <label htmlFor="category">Category</label>
-        <select
-          name="category"
-          id="category"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-        >
-          <option value="">Select category</option>
+            {type === "expense" && (
+              <>
+                <option value="food">Food</option>
+                <option value="housing">Housing</option>
+                <option value="transportation">Transportation</option>
+              </>
+            )}
 
-          {type === "income" && <option value="salary">Salary</option>}
-
-          {type === "expense" && (
-            <>
-              <option value="food">Food</option>
-              <option value="housing">Housing</option>
-              <option value="transportation">Transportation</option>
-            </>
-          )}
-
-          <option value="other">Other</option>
-        </select>
-        {errors.category && <p role="alert">{errors.category}</p>}
+            <option value="other">Other</option>
+          </select>
+          {errors.category && <p role="alert">{errors.category}</p>}
+        </div>
 
         <button type="submit">Add transaction</button>
       </form>

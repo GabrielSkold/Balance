@@ -1,3 +1,4 @@
+import formatCurrency from "../../utils/formatCurrency";
 import "./CategorySummary.css";
 const CategorySummary = ({ expenseTransactions, totalExpenses }) => {
   const categories = [
@@ -30,6 +31,9 @@ const CategorySummary = ({ expenseTransactions, totalExpenses }) => {
           (sum, transaction) => sum + transaction.amount,
           0,
         );
+
+        const formattedTotal = formatCurrency(total);
+
         const percentage =
           totalExpenses > 0 ? (total / totalExpenses) * 100 : 0;
         return (
@@ -42,7 +46,7 @@ const CategorySummary = ({ expenseTransactions, totalExpenses }) => {
                 style={{ width: `${percentage}%` }}
               ></div>
             </div>
-            <span className="category-total">{total}</span>
+            <span className="category-total">{formattedTotal}</span>
           </div>
         );
       })}

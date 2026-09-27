@@ -3,7 +3,7 @@ import "./App.css";
 import Overview from "./pages/Overview/Overview";
 import Transactions from "./pages/Transactions/Transactions";
 import Layout from "./components/Layout/Layout";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [storageResult] = useState(() => {
@@ -33,30 +33,33 @@ function App() {
 
   const [saveError, setSaveError] = useState("");
 
-  useEffect(() => {
+  const updateTransactions = (nextTransactions) => {
+    setTransactions(nextTransactions);
+
     if (storageResult.loadFailed) {
       return;
     }
 
     try {
-      localStorage.setItem("transactions", JSON.stringify(transactions));
+      localStorage.setItem("transactions", JSON.stringify(nextTransactions));
       setSaveError("");
     } catch {
       setSaveError(
         "Changes could not be saved. They may be lost when you reload.",
       );
     }
-  }, [transactions, storageResult.loadFailed]);
+  };
 
   const addTransaction = (newTransaction) => {
-    setTransactions([...transactions, newTransaction]);
+    updateTransactions([...transactions, newTransaction]);
   };
 
   const deleteTransaction = (id) => {
     const remainingTransactions = transactions.filter(
       (transaction) => transaction.id !== id,
     );
-    setTransactions(remainingTransactions);
+
+    updateTransactions(remainingTransactions);
   };
 
   return (

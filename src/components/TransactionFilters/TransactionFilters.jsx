@@ -1,6 +1,6 @@
 const TransactionsFilter = ({ typeFilter, setTypeFilter }) => {
   return (
-    <>
+    <div className="form-field">
       <label htmlFor="type-filter">Filter by type</label>
       <select
         id="type-filter"
@@ -11,7 +11,7 @@ const TransactionsFilter = ({ typeFilter, setTypeFilter }) => {
         <option value="income">Income</option>
         <option value="expense">Expenses</option>
       </select>
-    </>
+    </div>
   );
 };
 export default TransactionsFilter;

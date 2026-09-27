@@ -302,6 +302,18 @@
   outline-offset: 1px;
 }
 
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: #f0f0f6;
+  color: #6b7280;
+  border-radius: 10px;
+}
+
 @media (min-width: 768px) {
   .summary-cards {
     flex-direction: row;

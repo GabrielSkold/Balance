@@ -1,16 +1,13 @@
-const TransactionItem = ({ transaction, deleteTransaction }) => {
-  const currencyFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "SEK",
-  });
+import formatCurrency from "../../utils/formatCurrency";
 
+const TransactionItem = ({ transaction, deleteTransaction }) => {
   const dateFormatter = new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
     month: "short",
     year: "numeric",
   });
 
-  const formattedAmount = currencyFormatter.format(transaction.amount);
+  const formattedAmount = formatCurrency(transaction.amount);
   const formattedDate = dateFormatter.format(
     new Date(`${transaction.date}T00:00:00`),
   );

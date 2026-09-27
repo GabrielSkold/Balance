@@ -13,14 +13,16 @@ const Transactions = ({ transactions, addTransaction, deleteTransaction }) => {
   });
   const [typeFilter, setTypeFilter] = useState("all");
 
-  const filteredTransactions = transactions.filter(
-    (transaction) =>
-      (typeFilter === "all" || transaction.type === typeFilter) &&
-      (appliedDateFilter.date === "" ||
-        transaction.date === appliedDateFilter.date) &&
-      (appliedDateFilter.month === "" ||
-        transaction.date.startsWith(appliedDateFilter.month)),
-  );
+  const filteredTransactions = transactions
+    .filter(
+      (transaction) =>
+        (typeFilter === "all" || transaction.type === typeFilter) &&
+        (appliedDateFilter.date === "" ||
+          transaction.date === appliedDateFilter.date) &&
+        (appliedDateFilter.month === "" ||
+          transaction.date.startsWith(appliedDateFilter.month)),
+    )
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   const dateFilterLabel =
     appliedDateFilter.date || appliedDateFilter.month || "Filter by date";

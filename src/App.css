@@ -282,6 +282,26 @@
   outline-offset: 3px;
 }
 
+.delete-button {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid #cbd0dc;
+  border-radius: 8px;
+  color: #c92a2a;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #fff5f5;
+}
+
+.delete-button:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 1px;
+}
+
 @media (min-width: 768px) {
   .summary-cards {
     flex-direction: row;

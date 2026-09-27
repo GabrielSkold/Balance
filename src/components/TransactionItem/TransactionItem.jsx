@@ -10,7 +10,13 @@ const TransactionItem = ({ transaction, deleteTransaction }) => {
         {transaction.amount}
       </p>
       {deleteTransaction && (
-        <button onClick={() => deleteTransaction(transaction.id)}>X</button>
+        <button
+          className="delete-button"
+          aria-label="Delete transaction"
+          onClick={() => deleteTransaction(transaction.id)}
+        >
+          X
+        </button>
       )}
     </li>
   );

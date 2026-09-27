@@ -1,0 +1,69 @@
+import { useState } from "react";
+import CurrencyConverter from "../../components/CurrencyConverter/CurrencyConverter";
+import SummaryCard from "../../components/SummaryCard/SummaryCard";
+import TransactionsList from "../../components/TransactionsList/TransactionsList";
+import CategorySummary from "../../components/CategorySummary/CategorySummary";
+
+const Overview = ({ transactions }) => {
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const filteredTransactions = transactions.filter(
+    (transaction) =>
+      selectedMonth === "" || transaction.date.startsWith(selectedMonth),
+  );
+  const incomeTransactions = filteredTransactions.filter(
+    (transaction) => transaction.type === "income",
+  );
+  const totalIncome = incomeTransactions.reduce(
+    (sum, transaction) => sum + transaction.amount,
+    0,
+  );
+  const expenseTransactions = filteredTransactions.filter(
+    (transaction) => transaction.type === "expense",
+  );
+  const totalExpenses = expenseTransactions.reduce(
+    (sum, transaction) => sum + transaction.amount,
+    0,
+  );
+  const balance = totalIncome - totalExpenses;
+
+  const recentTransactions = [...filteredTransactions]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 5);
+
+  return (
+    <>
+      <div className="overview-top">
+        <div>
+          <h1>Overview</h1>
+          <label htmlFor="filter-month">Filter by month</label>
+          <input
+            type="month"
+            id="filter-month"
+            value={selectedMonth}
+            onChange={(event) => setSelectedMonth(event.target.value)}
+          />
+        </div>
+
+        <CurrencyConverter />
+      </div>
+      <div className="summary-cards">
+        <SummaryCard label={"Income"} amount={totalIncome} />
+        <SummaryCard label={"Expenses"} amount={totalExpenses} />
+        <SummaryCard label={"Balance"} amount={balance} />
+      </div>
+      <div className="overview-details">
+        <section>
+          <CategorySummary
+            expenseTransactions={expenseTransactions}
+            totalExpenses={totalExpenses}
+          />
+        </section>
+        <section>
+          <h2>Recent transactions</h2>
+          <TransactionsList transactions={recentTransactions} />
+        </section>
+      </div>
+    </>
+  );
+};
+export default Overview;

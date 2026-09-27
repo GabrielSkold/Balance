@@ -1,0 +1,362 @@
+.app-shell {
+  max-width: 1100px;
+  background-color: #ffffff;
+  margin: 24px auto;
+  width: calc(100% - 32px);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.app-header {
+  border-bottom: 1px solid #e6e7ee;
+  padding-bottom: 24px;
+}
+.app-nav {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.app-nav a {
+  text-decoration: none;
+  color: navy;
+}
+.app-nav a:hover {
+  cursor: pointer;
+}
+
+.app-nav a.active {
+  color: green;
+  font-weight: 600;
+}
+
+.summary-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-block: 24px;
+}
+
+.summary-card {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #e6e7ee;
+  border-radius: 12px;
+}
+
+.summary-card h2 {
+  font-size: 16px;
+  margin: 0;
+  text-decoration: underline;
+}
+
+.summary-card p {
+  font-size: 28px;
+  margin: 8px 0 0;
+}
+
+.overview-details {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.overview-details > section {
+  flex: 1;
+  min-width: 0;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #e6e7ee;
+  padding-block: 16px;
+}
+
+.transaction-details {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.transaction-details p {
+  margin: 0;
+}
+
+.transaction-details p:last-child {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.transaction-amount {
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.transactions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.transaction-amount.income {
+  color: #087f5b;
+}
+
+.transaction-amount.expense {
+  color: #c92a2a;
+}
+
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-block: 12px;
+}
+
+.category-label {
+  flex: 0 0 100px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.category-bar {
+  flex: 1;
+  min-width: 0;
+}
+
+.category-total {
+  flex: 0 0 64px;
+  text-align: right;
+  font-size: 14px;
+}
+
+.overview-top {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 24px;
+}
+
+.overview-top > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.overview-top .currency-converter {
+  margin-top: 0;
+}
+
+.currency-converter {
+  margin-top: 32px;
+  padding: 20px;
+  background-color: #f5f6fa;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.currency-converter h2 {
+  margin-top: 0;
+}
+
+.currency-converter label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.currency-converter input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd0dc;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.currency-converter input:focus-visible {
+  outline: 2px solid #087f5b;
+  outline-offset: 1px;
+}
+
+.currency-converter input[type="number"]::-webkit-inner-spin-button,
+.currency-converter input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  background-color: #f5f6fa;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd0dc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  height: 44px;
+}
+
+.form-field input[type="number"]::-webkit-inner-spin-button,
+.form-field input[type="number"]::-webkit-outer-spin-button,
+.transaction-filters input,
+.transaction-filters select {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.transaction-form > button[type="submit"] {
+  background-color: #087f5b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.transaction-form > button[type="submit"]:hover {
+  background-color: #066649;
+}
+.transaction-form > button[type="submit"]:focus-visible {
+  outline: 2px solid #087f5b;
+  outline-offset: 3px;
+}
+
+.form-field [role="alert"] {
+  color: #c92a2a;
+  font-size: 14px;
+  margin: 0;
+}
+
+.transaction-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.date-filter-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #cbd0dc;
+  border-radius: 8px;
+}
+
+.transaction-filters button {
+  min-height: 44px;
+  padding: 10px 16px;
+  background-color: #ffffff;
+  border: 1px solid #cbd0dc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.transaction-filters button:hover {
+  background-color: #f5f6fa;
+}
+
+.transaction-filters button:focus-visible {
+  outline: 2px solid #087f5b;
+  outline-offset: 3px;
+}
+
+.delete-button {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid #cbd0dc;
+  border-radius: 8px;
+  color: #c92a2a;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #fff5f5;
+}
+
+.delete-button:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 1px;
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: #f0f0f6;
+  color: #6b7280;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .summary-cards {
+    flex-direction: row;
+  }
+  .overview-details {
+    flex-direction: row;
+  }
+  .overview-top {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .overview-top .currency-converter {
+    flex: 0 1 360px;
+  }
+
+  .transaction-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .transaction-form > .form-field {
+    flex: 0 0 (calc(50% - 10px));
+  }
+
+  .transaction-form > .form-field:first-child {
+    flex-basis: 100%;
+  }
+
+  .transaction-form > button[type="submit"] {
+    align-self: flex-end;
+    height: 44px;
+    padding: 0 20 px;
+    margin-inline: auto;
+  }
+
+  .transaction-filters {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  .date-filter-panel {
+    flex-basis: 100%;
+  }
+}
